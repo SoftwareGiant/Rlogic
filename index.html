@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>R-Logic Instruments | Pollution Checking Solutions</title>
+    <title>R Logic Instruments | Pollution Checking Solutions</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
@@ -93,10 +93,11 @@
       }
 
       .logo-text {
-        font-size: 1.5rem;
+        font-size: 1.25rem; /* Slightly smaller to fit full name */
         font-weight: 700;
         color: var(--primary);
         letter-spacing: -0.5px;
+        text-transform: uppercase;
       }
 
       .nav-links {
@@ -323,19 +324,24 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
-        /* UPDATED: Changed from center to flex-start to keep headers aligned at the top */
         align-items: flex-start;
         gap: 20px;
       }
 
+      /* CRITICAL FIX FOR ALIGNMENT */
       .contact-person {
         text-align: center;
         min-width: 200px;
+        /* Force children (H4 and P) to center vertically relative to each other */
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
       }
-
-      /* UPDATED: Force the H4 inside the bottom card to center horizontally */
-      .contact-bottom-card .contact-person h4 {
+      
+      /* Ensure the H4 doesn't stretch full width inside the flex container */
+      .contact-person h4 {
         justify-content: center;
+        width: 100%;
       }
 
       /* Footer */
@@ -362,6 +368,10 @@
 
       /* --- RESPONSIVE / MOBILE MENU FIX --- */
       @media (max-width: 768px) {
+        .logo-text {
+            font-size: 1rem; /* Smaller font for long company name on mobile */
+        }
+        
         .hero-content h1 {
           font-size: 2.5rem;
         }
@@ -410,7 +420,7 @@
       <nav>
         <div class="logo-container">
           <img src="r logo.jpg" alt="R Logic Logo" class="logo-img" />
-          <span class="logo-text">R-LOGIC</span>
+          <span class="logo-text">R LOGIC INSTRUMENTS</span>
         </div>
 
         <div class="nav-links">
@@ -630,7 +640,7 @@
 
     <footer>
       <div class="footer-content">
-        <h3>R-LOGIC INSTRUMENTS</h3>
+        <h3>R LOGIC INSTRUMENTS</h3>
         <p>
           Providing best after-sales services across India with well-trained
           engineers.
