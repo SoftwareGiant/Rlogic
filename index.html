@@ -78,7 +78,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative; /* Needed for mobile menu positioning */
+        position: relative;
       }
 
       .logo-container {
@@ -303,6 +303,7 @@
         box-shadow: var(--shadow);
         margin-bottom: 20px;
       }
+      /* General header style for contact cards */
       .contact-info-card h4 {
         color: var(--primary);
         margin-bottom: 15px;
@@ -314,6 +315,27 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
+      }
+
+      /* NEW STYLES FOR BOTTOM CONTACT SECTION */
+      .contact-bottom-card {
+        grid-column: 1 / -1; 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        /* UPDATED: Changed from center to flex-start to keep headers aligned at the top */
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .contact-person {
+        text-align: center;
+        min-width: 200px;
+      }
+
+      /* UPDATED: Force the H4 inside the bottom card to center horizontally */
+      .contact-bottom-card .contact-person h4 {
+        justify-content: center;
       }
 
       /* Footer */
@@ -348,27 +370,30 @@
           grid-template-columns: 1fr;
         }
 
-        /* Show the hamburger icon */
+        .contact-bottom-card {
+          flex-direction: column;
+          gap: 30px;
+          align-items: center; /* Center everything on mobile stack */
+        }
+
         .mobile-menu-btn {
           display: block;
         }
 
-        /* Style the menu to be hidden by default on mobile */
         .nav-links {
-          display: none; /* Hidden initially */
+          display: none;
           position: absolute;
-          top: 100%; /* Position it right below the header */
+          top: 100%;
           left: 0;
           width: 100%;
           background-color: var(--white);
-          flex-direction: column; /* Stack links vertically */
+          flex-direction: column;
           align-items: center;
           padding: 20px 0;
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           border-top: 1px solid #eee;
         }
 
-        /* This class is added by JS to show the menu */
         .nav-links.active {
           display: flex;
         }
@@ -387,14 +412,14 @@
           <img src="r logo.jpg" alt="R Logic Logo" class="logo-img" />
           <span class="logo-text">R-LOGIC</span>
         </div>
-        
+
         <div class="nav-links">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#products">Products</a>
           <a href="#contact">Contact</a>
         </div>
-        
+
         <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
       </nav>
     </header>
@@ -403,8 +428,9 @@
       <div class="hero-content reveal">
         <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
         <p>
-          Trusted solutions in Pollution Checking, Gas Analyzers, and Garage
-          Equipment. Excellence in manufacturing and service since 2020.
+          Trusted solutions in Pollution Checking, Smoke meter, Gas Analyzers,
+          and Garage Equipment. Excellence in manufacturing and service since
+          2020.
         </p>
         <a href="#products" class="btn">View Equipment</a>
       </div>
@@ -462,12 +488,12 @@
         <div class="products-grid">
           <div class="product-card reveal">
             <div class="product-img-container">
-              <img src="product1.jpeg" alt="Diesel Smoke Meter AES021" />
+              <img src="product2.jpeg" alt="Diesel Smoke Meter" />
             </div>
             <div class="product-info">
               <span class="tag">Diesel</span>
               <span class="tag">ARAI Approved</span>
-              <h3>Smoke Meter AES021</h3>
+              <h3>Smoke Meter</h3>
               <p>
                 Aerosmart Diesel Smoke meter designed for precision and
                 durability.
@@ -492,12 +518,12 @@
 
           <div class="product-card reveal">
             <div class="product-img-container">
-              <img src="product2.jpeg" alt="5 Gas Analyzer AEG051" />
+              <img src="product1.jpeg" alt="5 Gas Analyzer" />
             </div>
             <div class="product-info">
               <span class="tag">Petrol/CNG/LPG</span>
               <span class="tag">High Accuracy</span>
-              <h3>5 Gas Analyzer AEG051</h3>
+              <h3>5 Gas Analyzer</h3>
               <p>
                 Advanced gas analysis for modern vehicles with touch interface.
               </p>
@@ -576,16 +602,7 @@
         </div>
 
         <div class="contact-wrapper reveal" style="margin-top: 30px">
-          <div
-            class="contact-info-card"
-            style="
-              grid-column: 1 / -1;
-              display: flex;
-              flex-wrap: wrap;
-              justify-content: space-around;
-              align-items: center;
-            "
-          >
+          <div class="contact-info-card contact-bottom-card">
             <div class="contact-person">
               <h4><i class="fas fa-phone-alt"></i> Sarvesh Kumar</h4>
               <p class="contact-item">
@@ -603,9 +620,7 @@
             <div class="contact-person">
               <h4><i class="fas fa-envelope"></i> Email Us</h4>
               <p class="contact-item">
-                <a href="mailto:rlogicinstruments@gmail.com"
-                  >rlogicinstruments@gmail.com</a
-                >
+                <a href="mailto:rlogicinstruments@gmail.com" style="word-break: break-all;">rlogicinstruments@gmail.com</a>
               </p>
             </div>
           </div>
@@ -633,7 +648,7 @@
 
       menuBtn.addEventListener("click", () => {
         navLinks.classList.toggle("active");
-        
+
         // Optional: Toggle icon between bars and times (X)
         const icon = menuBtn.querySelector("i");
         if (navLinks.classList.contains("active")) {
@@ -646,7 +661,7 @@
       });
 
       // Close menu when a link is clicked (UX improvement)
-      document.querySelectorAll(".nav-links a").forEach(link => {
+      document.querySelectorAll(".nav-links a").forEach((link) => {
         link.addEventListener("click", () => {
           navLinks.classList.remove("active");
           const icon = menuBtn.querySelector("i");
@@ -654,7 +669,6 @@
           icon.classList.add("fa-bars");
         });
       });
-
 
       // 2. SCROLL REVEAL ANIMATION
       document.addEventListener("DOMContentLoaded", () => {
