@@ -16,9 +16,10 @@
     <style>
       /* --- CSS VARIABLES & RESET --- */
       :root {
-        --primary: #008f51;
-        --primary-dark: #006b3c;
-        --secondary: #0056b3;
+        /* BRAND COLORS */
+        --instrument-green: #008f51; /* Matches "Instruments" */
+        --logic-blue: #0056b3;       /* Matches "R Logic" */
+        
         --text-dark: #333;
         --text-light: #666;
         --bg-light: #f9fbfd;
@@ -93,9 +94,8 @@
       }
 
       .logo-text {
-        font-size: 1.25rem; /* Slightly smaller to fit full name */
+        font-size: 1.25rem;
         font-weight: 700;
-        color: var(--primary);
         letter-spacing: -0.5px;
         text-transform: uppercase;
       }
@@ -111,8 +111,9 @@
         transition: color 0.3s;
       }
 
+      /* Hover matches the Blue Logic theme */
       .nav-links a:hover {
-        color: var(--primary);
+        color: var(--logic-blue);
       }
 
       .mobile-menu-btn {
@@ -129,10 +130,11 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+        /* UPDATED GRADIENT: Blue (Top Left) to Green (Bottom Right) */
         background: linear-gradient(
           135deg,
-          rgba(230, 255, 240, 0.8) 0%,
-          rgba(255, 255, 255, 1) 100%
+          rgba(230, 245, 255, 0.9) 0%,   /* Light Logic Blue */
+          rgba(235, 255, 240, 0.9) 100%  /* Light Instrument Green */
         );
         padding: 0 20px;
         margin-top: 60px;
@@ -146,7 +148,7 @@
       }
 
       .hero-content span {
-        color: var(--primary);
+        color: var(--instrument-green);
       }
 
       .hero-content p {
@@ -156,9 +158,17 @@
         margin: 0 auto 40px;
       }
 
+      /* Highlight Text in Blue */
+      .highlight-text {
+        color: var(--logic-blue);
+        font-weight: 700;
+        font-size: 1.3rem;
+      }
+
+      /* Button in Green */
       .btn {
         display: inline-block;
-        background: var(--primary);
+        background: var(--instrument-green);
         color: var(--white);
         padding: 12px 30px;
         border-radius: 50px;
@@ -169,7 +179,7 @@
       .btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 20px rgba(0, 143, 81, 0.3);
-        background: var(--primary-dark);
+        background: var(--logic-blue); /* Hover changes to Blue */
       }
 
       /* --- SECTIONS --- */
@@ -188,11 +198,12 @@
         position: relative;
       }
 
+      /* Underline in Blue */
       .section-title::after {
         content: "";
         width: 60px;
         height: 4px;
-        background: var(--primary);
+        background: var(--logic-blue);
         position: absolute;
         bottom: -15px;
         left: 50%;
@@ -210,6 +221,7 @@
       .about-text h3 {
         font-size: 1.8rem;
         margin-bottom: 20px;
+        color: var(--logic-blue); /* Blue Heading */
       }
       .stats-grid {
         display: grid;
@@ -226,8 +238,11 @@
       }
       .stat-card i {
         font-size: 2rem;
-        color: var(--primary);
+        color: var(--logic-blue); /* Icons are Blue */
         margin-bottom: 10px;
+      }
+      .stat-card h4 {
+          color: var(--text-dark);
       }
 
       /* Product Styles */
@@ -266,18 +281,21 @@
         flex-grow: 1;
       }
       .product-info h3 {
-        color: var(--secondary);
+        color: var(--logic-blue); /* Product Titles in Blue */
         margin-bottom: 10px;
       }
+      
+      /* Tags: Light Blue BG with Blue Text */
       .tag {
-        background: #e6f7ef;
-        color: var(--primary);
+        background: #e6f3ff;
+        color: var(--logic-blue);
         padding: 4px 10px;
         border-radius: 4px;
         font-size: 0.8rem;
         font-weight: 600;
         margin-right: 5px;
       }
+      
       .features-list {
         margin-top: 15px;
         font-size: 0.9rem;
@@ -287,7 +305,7 @@
         margin-bottom: 8px;
       }
       .features-list i {
-        color: var(--primary);
+        color: var(--instrument-green); /* Checkmarks remain Green */
         margin-right: 8px;
       }
 
@@ -304,21 +322,24 @@
         box-shadow: var(--shadow);
         margin-bottom: 20px;
       }
-      /* General header style for contact cards */
       .contact-info-card h4 {
-        color: var(--primary);
+        color: var(--logic-blue); /* Contact Headers in Blue */
         margin-bottom: 15px;
         display: flex;
         align-items: center;
         gap: 10px;
       }
+      .contact-info-card i {
+          color: var(--instrument-green); /* Icons in Green */
+      }
+
       .locations-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
       }
 
-      /* NEW STYLES FOR BOTTOM CONTACT SECTION */
+      /* Contact Bottom Card */
       .contact-bottom-card {
         grid-column: 1 / -1; 
         display: flex;
@@ -328,17 +349,14 @@
         gap: 20px;
       }
 
-      /* CRITICAL FIX FOR ALIGNMENT */
       .contact-person {
         text-align: center;
         min-width: 200px;
-        /* Force children (H4 and P) to center vertically relative to each other */
         display: flex;
         flex-direction: column;
         align-items: center; 
       }
       
-      /* Ensure the H4 doesn't stretch full width inside the flex container */
       .contact-person h4 {
         justify-content: center;
         width: 100%;
@@ -369,27 +387,65 @@
       /* --- RESPONSIVE / MOBILE MENU FIX --- */
       @media (max-width: 768px) {
         .logo-text {
-            font-size: 1rem; /* Smaller font for long company name on mobile */
+            font-size: 1rem; 
+        }
+
+        .section {
+          padding: 25px 15px;
+        }
+
+        .section-title {
+          margin-bottom: 20px;
+          font-size: 1.8rem;
+        }
+
+        /* Hero Adjustments */
+        .hero {
+          height: auto; 
+          min-height: auto; 
+          padding-top: 100px;
+          padding-bottom: 20px; 
+        }
+        .hero-content h1 {
+          font-size: 2.2rem;
+          margin-bottom: 15px;
+        }
+        .hero-content p {
+          margin-bottom: 25px;
+        }
+
+        /* 1. Center the 'Who We Are' text on mobile */
+        .about-text {
+            text-align: center;
         }
         
-        .hero-content h1 {
-          font-size: 2.5rem;
-        }
-        .about-grid,
+        .about-grid, 
+        .products-grid, 
+        .locations-grid, 
+        .stats-grid,
         .contact-wrapper {
           grid-template-columns: 1fr;
+          gap: 20px;
         }
 
         .contact-bottom-card {
           flex-direction: column;
-          gap: 30px;
-          align-items: center; /* Center everything on mobile stack */
+          gap: 15px;
+          align-items: center;
+        }
+        
+        .contact-info-card {
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .stats-grid {
+            margin-top: 15px;
         }
 
         .mobile-menu-btn {
           display: block;
         }
-
         .nav-links {
           display: none;
           position: absolute;
@@ -403,11 +459,9 @@
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           border-top: 1px solid #eee;
         }
-
         .nav-links.active {
           display: flex;
         }
-
         .nav-links a {
           margin: 10px 0;
           font-size: 1.1rem;
@@ -420,7 +474,10 @@
       <nav>
         <div class="logo-container">
           <img src="r logo.jpg" alt="R Logic Logo" class="logo-img" />
-          <span class="logo-text">R LOGIC INSTRUMENTS</span>
+          <span class="logo-text">
+            <span style="color: var(--logic-blue)">R LOGIC</span> 
+            <span style="color: var(--instrument-green)">INSTRUMENTS</span>
+          </span>
         </div>
 
         <div class="nav-links">
@@ -438,7 +495,9 @@
       <div class="hero-content reveal">
         <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
         <p>
-          Trusted solutions in Pollution Checking, Smoke meter, Gas Analyzers,
+          Trusted solutions in 
+          <span class="highlight-text">Pollution Checking</span>, 
+          Smoke meter, Gas Analyzers,
           and Garage Equipment. Excellence in manufacturing and service since
           2020.
         </p>
@@ -598,7 +657,7 @@
           <div class="contact-info-card">
             <h4><i class="fas fa-map-marker-alt"></i> Patna Branch</h4>
             <p class="contact-item">
-              Chhoti Pahadi, Bahadurpur,<br />Patna - 800007
+              Near Microtek Office, Chhoti Pahadi, Zero Miles,<br />Patna - Bihar
             </p>
           </div>
 
@@ -613,10 +672,16 @@
 
         <div class="contact-wrapper reveal" style="margin-top: 30px">
           <div class="contact-info-card contact-bottom-card">
+            
             <div class="contact-person">
               <h4><i class="fas fa-phone-alt"></i> Sarvesh Kumar</h4>
+              <p class="contact-item" style="margin-bottom: 5px;">
+                 <a href="tel:8178725798">Mob: 8178725798</a>
+              </p>
               <p class="contact-item">
-                <a href="tel:8178725798">8178725798</a>
+                 <a href="https://wa.me/917053736481" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
+                   <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i> 7053736481
+                 </a>
               </p>
             </div>
 
