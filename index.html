@@ -17,8 +17,8 @@
       /* --- CSS VARIABLES & RESET --- */
       :root {
         /* BRAND COLORS */
-        --instrument-green: #008f51; /* Matches "Instruments" */
-        --logic-blue: #0056b3;       /* Matches "R Logic" */
+        --instrument-green: #008f51;
+        --logic-blue: #0056b3;
         
         --text-dark: #333;
         --text-light: #666;
@@ -111,7 +111,6 @@
         transition: color 0.3s;
       }
 
-      /* Hover matches the Blue Logic theme */
       .nav-links a:hover {
         color: var(--logic-blue);
       }
@@ -125,47 +124,145 @@
 
       /* --- HERO SECTION --- */
       .hero {
-        height: 100vh;
+        padding-top: 80px; /* Space for fixed navbar */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--bg-light);
+      }
+
+      /* --- FULL WIDTH BANNER CAROUSEL --- */
+      .hero-carousel {
+        width: 100%;
+        height: 500px; /* Increased height to accommodate text + image */
+        overflow: hidden;
+        position: relative;
+        background: #fff;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+
+      .carousel-track {
+        display: flex;
+        height: 100%;
+        transition: transform 0.6s ease-in-out;
+      }
+
+      .carousel-slide {
+        min-width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
-        /* UPDATED GRADIENT: Blue (Top Left) to Green (Bottom Right) */
-        background: linear-gradient(
-          135deg,
-          rgba(230, 245, 255, 0.9) 0%,   /* Light Logic Blue */
-          rgba(235, 255, 240, 0.9) 100%  /* Light Instrument Green */
-        );
-        padding: 0 20px;
-        margin-top: 60px;
+        /* Subtle gradient for each slide */
+        background: linear-gradient(135deg, #eaf6ff 0%, #e8fff1 100%);
       }
 
-      .hero-content h1 {
-        font-size: 3.5rem;
+      /* Inner container to hold Text + Image side by side */
+      .slide-content-wrapper {
+        max-width: 1200px;
+        width: 100%;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      /* Slide Text Styles */
+      .slide-text {
+        flex: 1;
+        opacity: 0; /* Hidden initially for animation */
+        transform: translateY(20px);
+        transition: opacity 0.5s 0.3s, transform 0.5s 0.3s; /* Delay for effect */
+      }
+      
+      /* Only show text when the slide is actually visible (handled via logic if we wanted advanced animation, 
+         but for simple CSS slider, we keep it visible or use simple static styling. 
+         For simplicity in this moving banner, we keep opacity 1) */
+      .slide-text {
+        opacity: 1; 
+        transform: translateY(0);
+      }
+
+      .slide-text h2 {
+        font-size: 2.5rem;
+        color: var(--logic-blue);
+        margin-bottom: 10px;
+        line-height: 1.2;
+      }
+
+      .slide-text p {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        margin-bottom: 20px;
+      }
+
+      .slide-btn {
+        display: inline-block;
+        background: var(--instrument-green);
+        color: white;
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+
+      /* Slide Image Styles */
+      .slide-image {
+        flex: 1;
+        height: 400px; /* Control image area height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .slide-image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+        transition: transform 0.3s;
+      }
+      
+      .slide-image img:hover {
+          transform: scale(1.02);
+      }
+
+
+      /* --- HERO TEXT CONTENT (Static below banner) --- */
+      .hero-static-content {
+        max-width: 900px;
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .hero-static-content h1 {
+        font-size: 3rem;
         line-height: 1.2;
         margin-bottom: 20px;
         color: var(--text-dark);
       }
 
-      .hero-content span {
+      .hero-static-content span {
         color: var(--instrument-green);
       }
 
-      .hero-content p {
+      .hero-static-content p {
         font-size: 1.2rem;
         color: var(--text-light);
+        margin-bottom: 30px;
         max-width: 700px;
-        margin: 0 auto 40px;
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      /* Highlight Text in Blue */
       .highlight-text {
         color: var(--logic-blue);
         font-weight: 700;
         font-size: 1.3rem;
       }
 
-      /* Button in Green */
       .btn {
         display: inline-block;
         background: var(--instrument-green);
@@ -179,7 +276,7 @@
       .btn:hover {
         transform: translateY(-3px);
         box-shadow: 0 10px 20px rgba(0, 143, 81, 0.3);
-        background: var(--logic-blue); /* Hover changes to Blue */
+        background: var(--logic-blue);
       }
 
       /* --- SECTIONS --- */
@@ -198,7 +295,6 @@
         position: relative;
       }
 
-      /* Underline in Blue */
       .section-title::after {
         content: "";
         width: 60px;
@@ -221,7 +317,7 @@
       .about-text h3 {
         font-size: 1.8rem;
         margin-bottom: 20px;
-        color: var(--logic-blue); /* Blue Heading */
+        color: var(--logic-blue);
       }
       .stats-grid {
         display: grid;
@@ -238,7 +334,7 @@
       }
       .stat-card i {
         font-size: 2rem;
-        color: var(--logic-blue); /* Icons are Blue */
+        color: var(--logic-blue);
         margin-bottom: 10px;
       }
       .stat-card h4 {
@@ -281,11 +377,9 @@
         flex-grow: 1;
       }
       .product-info h3 {
-        color: var(--logic-blue); /* Product Titles in Blue */
+        color: var(--logic-blue);
         margin-bottom: 10px;
       }
-      
-      /* Tags: Light Blue BG with Blue Text */
       .tag {
         background: #e6f3ff;
         color: var(--logic-blue);
@@ -295,7 +389,6 @@
         font-weight: 600;
         margin-right: 5px;
       }
-      
       .features-list {
         margin-top: 15px;
         font-size: 0.9rem;
@@ -305,7 +398,7 @@
         margin-bottom: 8px;
       }
       .features-list i {
-        color: var(--instrument-green); /* Checkmarks remain Green */
+        color: var(--instrument-green);
         margin-right: 8px;
       }
 
@@ -323,23 +416,20 @@
         margin-bottom: 20px;
       }
       .contact-info-card h4 {
-        color: var(--logic-blue); /* Contact Headers in Blue */
+        color: var(--logic-blue);
         margin-bottom: 15px;
         display: flex;
         align-items: center;
         gap: 10px;
       }
       .contact-info-card i {
-          color: var(--instrument-green); /* Icons in Green */
+          color: var(--instrument-green);
       }
-
       .locations-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
       }
-
-      /* Contact Bottom Card */
       .contact-bottom-card {
         grid-column: 1 / -1; 
         display: flex;
@@ -348,7 +438,6 @@
         align-items: flex-start;
         gap: 20px;
       }
-
       .contact-person {
         text-align: center;
         min-width: 200px;
@@ -356,7 +445,6 @@
         flex-direction: column;
         align-items: center; 
       }
-      
       .contact-person h4 {
         justify-content: center;
         width: 100%;
@@ -386,44 +474,33 @@
 
       /* --- RESPONSIVE / MOBILE MENU FIX --- */
       @media (max-width: 768px) {
-        .logo-text {
-            font-size: 1rem; 
+        .logo-text { font-size: 1rem; }
+        .section { padding: 25px 15px; }
+        .section-title { margin-bottom: 20px; font-size: 1.8rem; }
+
+        /* Banner Mobile */
+        .hero-carousel {
+            height: auto; /* Height adapts to content */
+            padding: 30px 0;
         }
 
-        .section {
-          padding: 25px 15px;
-        }
-
-        .section-title {
-          margin-bottom: 20px;
-          font-size: 1.8rem;
-        }
-
-        /* Hero Adjustments */
-        .hero {
-          height: auto; 
-          min-height: auto; 
-          padding-top: 100px;
-          padding-bottom: 20px; 
-        }
-        .hero-content h1 {
-          font-size: 2.2rem;
-          margin-bottom: 15px;
-        }
-        .hero-content p {
-          margin-bottom: 25px;
-        }
-
-        /* 1. Center the 'Who We Are' text on mobile */
-        .about-text {
+        .slide-content-wrapper {
+            flex-direction: column-reverse; /* Image on top, text on bottom */
             text-align: center;
+            gap: 20px;
         }
-        
-        .about-grid, 
-        .products-grid, 
-        .locations-grid, 
-        .stats-grid,
-        .contact-wrapper {
+
+        .slide-image {
+            height: 200px; /* Smaller image on mobile */
+            width: 100%;
+        }
+
+        .slide-text h2 {
+            font-size: 1.8rem;
+        }
+
+        .about-text { text-align: center; }
+        .about-grid, .products-grid, .locations-grid, .stats-grid, .contact-wrapper {
           grid-template-columns: 1fr;
           gap: 20px;
         }
@@ -433,19 +510,13 @@
           gap: 15px;
           align-items: center;
         }
-        
         .contact-info-card {
             padding: 20px;
             margin-bottom: 10px;
         }
-        
-        .stats-grid {
-            margin-top: 15px;
-        }
+        .stats-grid { margin-top: 15px; }
 
-        .mobile-menu-btn {
-          display: block;
-        }
+        .mobile-menu-btn { display: block; }
         .nav-links {
           display: none;
           position: absolute;
@@ -459,13 +530,8 @@
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           border-top: 1px solid #eee;
         }
-        .nav-links.active {
-          display: flex;
-        }
-        .nav-links a {
-          margin: 10px 0;
-          font-size: 1.1rem;
-        }
+        .nav-links.active { display: flex; }
+        .nav-links a { margin: 10px 0; font-size: 1.1rem; }
       }
     </style>
   </head>
@@ -492,17 +558,63 @@
     </header>
 
     <section id="home" class="hero">
-      <div class="hero-content reveal">
-        <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
-        <p>
-          Trusted solutions in 
-          <span class="highlight-text">Pollution Checking</span>, 
-          Smoke meter, Gas Analyzers,
-          and Garage Equipment. Excellence in manufacturing and service since
-          2020.
-        </p>
-        <a href="#products" class="btn">View Equipment</a>
+      
+      <div class="hero-carousel">
+        <div class="carousel-track">
+            
+            <div class="carousel-slide">
+                <div class="slide-content-wrapper">
+                    <div class="slide-text">
+                        <h2>Diesel Smoke Meter</h2>
+                        <p>ARAI Approved Aerosmart Diesel Smoke Meter. Designed for high precision, durability, and OIML Class "0" Compliance.</p>
+                        <a href="#products" class="slide-btn">View Details</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="product2.jpeg" alt="Smoke Meter">
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content-wrapper">
+                    <div class="slide-text">
+                        <h2>5 Gas Analyzer</h2>
+                        <p>Advanced gas analysis for Petrol, CNG, and LPG vehicles. Features a 4" Big Graphic LCD Display and High Accuracy.</p>
+                        <a href="#products" class="slide-btn">View Details</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="product1.jpeg" alt="Gas Analyzer">
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-slide">
+                <div class="slide-content-wrapper">
+                    <div class="slide-text">
+                        <h2>Combined Analyzer</h2>
+                        <p>The ultimate all-in-one hybrid solution. Integrates Gas Analyzer and Smoke Meter capabilities with a space-saving design.</p>
+                        <a href="#products" class="slide-btn">View Details</a>
+                    </div>
+                    <div class="slide-image">
+                        <img src="product3.png" alt="Combined Analyzer">
+                    </div>
+                </div>
+            </div>
+
+        </div>
       </div>
+
+      <div class="hero-static-content reveal">
+          <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
+          <p>
+            Trusted solutions in 
+            <span class="highlight-text">Pollution Checking</span>, 
+            Smoke meter, Gas Analyzers,
+            and Garage Equipment. Excellence in manufacturing and service since
+            2020.
+          </p>
+      </div>
+
     </section>
 
     <section id="about" class="section">
@@ -723,8 +835,6 @@
 
       menuBtn.addEventListener("click", () => {
         navLinks.classList.toggle("active");
-
-        // Optional: Toggle icon between bars and times (X)
         const icon = menuBtn.querySelector("i");
         if (navLinks.classList.contains("active")) {
           icon.classList.remove("fa-bars");
@@ -735,7 +845,6 @@
         }
       });
 
-      // Close menu when a link is clicked (UX improvement)
       document.querySelectorAll(".nav-links a").forEach((link) => {
         link.addEventListener("click", () => {
           navLinks.classList.remove("active");
@@ -745,12 +854,33 @@
         });
       });
 
-      // 2. SCROLL REVEAL ANIMATION
+      // 2. HORIZONTAL SLIDING CAROUSEL LOGIC
       document.addEventListener("DOMContentLoaded", () => {
-        const observerOptions = {
-          threshold: 0.15, // Trigger when 15% of element is visible
-        };
+        const track = document.querySelector(".carousel-track");
+        const slides = document.querySelectorAll(".carousel-slide");
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        const slideInterval = 3000; // 3 seconds
 
+        if (totalSlides > 0) {
+            setInterval(() => {
+                currentIndex++;
+                
+                // When we reach the end, wrap back to the start
+                if (currentIndex >= totalSlides) {
+                    currentIndex = 0;
+                }
+
+                // Move the track to the left by (Index * 100%)
+                const moveAmount = currentIndex * 100;
+                track.style.transform = `translateX(-${moveAmount}%)`;
+            }, slideInterval);
+        }
+
+        // 3. SCROLL REVEAL ANIMATION
+        const observerOptions = {
+          threshold: 0.15,
+        };
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
@@ -758,9 +888,7 @@
             }
           });
         }, observerOptions);
-
-        const revealElements = document.querySelectorAll(".reveal");
-        revealElements.forEach((el) => observer.observe(el));
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
       });
     </script>
   </body>
