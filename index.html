@@ -19,12 +19,16 @@
         /* BRAND COLORS */
         --instrument-green: #008f51;
         --logic-blue: #0056b3;
-        
+
         --text-dark: #333;
         --text-light: #666;
         --bg-light: #f9fbfd;
         --white: #ffffff;
         --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+        /* UPDATED: Changed from dark gray to Brand Blue */
+        --top-bar-bg: #0056b3;
+        --top-bar-text: #ffffff;
       }
 
       * {
@@ -62,14 +66,64 @@
         transform: translateY(0);
       }
 
+      /* --- TOP INFO BAR --- */
+      .top-bar {
+        background-color: var(--top-bar-bg);
+        color: var(--top-bar-text);
+        font-size: 0.8rem;
+        padding: 8px 0;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1001; /* Higher than header */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .top-bar-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .top-bar-left,
+      .top-bar-right {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .info-item i {
+        /* Changed icon color to white for better contrast on blue bg */
+        color: #fff;
+        opacity: 0.8;
+      }
+
+      .info-item a:hover {
+        color: var(--white);
+        text-decoration: underline;
+        opacity: 0.9;
+      }
+
       /* --- HEADER & NAV --- */
       header {
         background: var(--white);
         box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
         position: fixed;
         width: 100%;
-        top: 0;
+        top: 40px; /* Default desktop height push */
         z-index: 1000;
+        transition: top 0.3s;
       }
 
       nav {
@@ -124,7 +178,8 @@
 
       /* --- HERO SECTION --- */
       .hero {
-        padding-top: 80px; /* Space for fixed navbar */
+        /* Adjusted padding to account for Top Bar + Header */
+        padding-top: 130px;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -139,7 +194,7 @@
         overflow: hidden;
         position: relative;
         background: #fff;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       }
 
       .carousel-track {
@@ -176,12 +231,9 @@
         transform: translateY(20px);
         transition: opacity 0.5s 0.3s, transform 0.5s 0.3s; /* Delay for effect */
       }
-      
-      /* Only show text when the slide is actually visible (handled via logic if we wanted advanced animation, 
-         but for simple CSS slider, we keep it visible or use simple static styling. 
-         For simplicity in this moving banner, we keep opacity 1) */
+
       .slide-text {
-        opacity: 1; 
+        opacity: 1;
         transform: translateY(0);
       }
 
@@ -221,14 +273,13 @@
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;
-        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.15));
+        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
         transition: transform 0.3s;
       }
-      
-      .slide-image img:hover {
-          transform: scale(1.02);
-      }
 
+      .slide-image img:hover {
+        transform: scale(1.02);
+      }
 
       /* --- HERO TEXT CONTENT (Static below banner) --- */
       .hero-static-content {
@@ -338,7 +389,7 @@
         margin-bottom: 10px;
       }
       .stat-card h4 {
-          color: var(--text-dark);
+        color: var(--text-dark);
       }
 
       /* Product Styles */
@@ -423,7 +474,7 @@
         gap: 10px;
       }
       .contact-info-card i {
-          color: var(--instrument-green);
+        color: var(--instrument-green);
       }
       .locations-grid {
         display: grid;
@@ -431,7 +482,7 @@
         gap: 20px;
       }
       .contact-bottom-card {
-        grid-column: 1 / -1; 
+        grid-column: 1 / -1;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
@@ -443,7 +494,7 @@
         min-width: 200px;
         display: flex;
         flex-direction: column;
-        align-items: center; 
+        align-items: center;
       }
       .contact-person h4 {
         justify-content: center;
@@ -472,51 +523,84 @@
         font-size: 0.9rem;
       }
 
-      /* --- RESPONSIVE / MOBILE MENU FIX --- */
-      @media (max-width: 768px) {
-        .logo-text { font-size: 1rem; }
-        .section { padding: 25px 15px; }
-        .section-title { margin-bottom: 20px; font-size: 1.8rem; }
+      /* =========================================
+         RESPONSIVE MEDIA QUERIES
+         ========================================= */
 
-        /* Banner Mobile */
+      /* Tablet / Small Desktop (1024px and below) */
+      @media (max-width: 1024px) {
         .hero-carousel {
-            height: auto; /* Height adapts to content */
-            padding: 30px 0;
+          height: 450px;
         }
-
-        .slide-content-wrapper {
-            flex-direction: column-reverse; /* Image on top, text on bottom */
-            text-align: center;
-            gap: 20px;
-        }
-
-        .slide-image {
-            height: 200px; /* Smaller image on mobile */
-            width: 100%;
-        }
-
         .slide-text h2 {
-            font-size: 1.8rem;
+          font-size: 2.2rem;
+        }
+        .hero-static-content h1 {
+          font-size: 2.5rem;
+        }
+        .about-text h3 {
+          font-size: 1.6rem;
+        }
+      }
+
+      /* Mobile Devices (900px and below) - Merged queries for better logic */
+      @media (max-width: 900px) {
+        /* TOP BAR: Enable Wrapping & Show All Content */
+        .top-bar {
+          position: relative; /* Scrolls away on mobile */
+          height: auto;
+          padding: 10px 0;
         }
 
-        .about-text { text-align: center; }
-        .about-grid, .products-grid, .locations-grid, .stats-grid, .contact-wrapper {
-          grid-template-columns: 1fr;
-          gap: 20px;
-        }
-
-        .contact-bottom-card {
+        .top-bar-container {
           flex-direction: column;
-          gap: 15px;
+          gap: 10px;
           align-items: center;
+          text-align: center;
         }
-        .contact-info-card {
-            padding: 20px;
-            margin-bottom: 10px;
-        }
-        .stats-grid { margin-top: 15px; }
 
-        .mobile-menu-btn { display: block; }
+        .top-bar-left,
+        .top-bar-right {
+          display: flex;
+          flex-wrap: wrap; /* Allows stacking if needed */
+          justify-content: center;
+          width: 100%;
+          gap: 10px;
+        }
+
+        /* Ensure all items are visible */
+        .info-item {
+          display: flex;
+          font-size: 0.85rem;
+        }
+
+        /* HEADER: Make sticky since top bar scrolls away */
+        header {
+          position: sticky;
+          top: 0;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* HERO: Adjust padding since header is no longer overlapping fixed space in the same way */
+        .hero {
+          padding-top: 20px; /* Reduced because header is no longer overlapping fixed space in the same way */
+        }
+      }
+
+      /* Smaller Mobile Devices (768px and below) */
+      @media (max-width: 768px) {
+        /* HEADER */
+        .logo-img {
+          height: 40px;
+        }
+        .logo-text {
+          font-size: 1rem;
+        }
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        /* NAVIGATION MENU */
         .nav-links {
           display: none;
           position: absolute;
@@ -530,18 +614,140 @@
           box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
           border-top: 1px solid #eee;
         }
-        .nav-links.active { display: flex; }
-        .nav-links a { margin: 10px 0; font-size: 1.1rem; }
+        .nav-links.active {
+          display: flex;
+        }
+        .nav-links a {
+          margin: 15px 0; /* More spacing for tap targets */
+          font-size: 1.1rem;
+        }
+
+        /* SECTIONS */
+        .section {
+          padding: 40px 15px;
+        }
+        .section-title {
+          margin-bottom: 30px;
+          font-size: 1.8rem;
+        }
+
+        /* HERO */
+        .hero-carousel {
+          height: auto;
+          padding: 40px 0;
+        }
+        .slide-content-wrapper {
+          flex-direction: column-reverse; /* Image on top, Text bottom */
+          text-align: center;
+          gap: 30px;
+        }
+        .slide-image {
+          height: 200px;
+          width: 100%;
+        }
+        .slide-text h2 {
+          font-size: 1.8rem;
+        }
+        .hero-static-content {
+          padding: 40px 20px;
+        }
+        .hero-static-content h1 {
+          font-size: 2rem;
+        }
+        .hero-static-content p {
+          font-size: 1rem;
+        }
+
+        /* GRIDS - Force Single Column */
+        .about-grid,
+        .contact-wrapper,
+        .products-grid,
+        .locations-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        /* ABOUT */
+        .about-text {
+          text-align: center;
+        }
+        .stats-grid {
+          margin-top: 20px;
+          gap: 15px;
+        }
+
+        /* CONTACT */
+        .contact-bottom-card {
+          flex-direction: column;
+          gap: 30px;
+          align-items: center;
+        }
+        .contact-info-card {
+          padding: 20px;
+          margin-bottom: 0;
+        }
+      }
+
+      /* Small Phones (480px and below) */
+      @media (max-width: 480px) {
+        .logo-text {
+          display: none; /* Hide text, keep logo icon if very small screen */
+        }
+        .logo-img {
+          height: 45px;
+        }
+        .info-item {
+          font-size: 0.75rem; /* Smaller text for top bar to fit better */
+        }
       }
     </style>
   </head>
   <body>
+    <div class="top-bar">
+      <div class="top-bar-container">
+        <div class="top-bar-left">
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Greater Noida, UP - 201310</span>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:rlogicinstruments@gmail.com"
+              >rlogicinstruments@gmail.com</a
+            >
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:8178725798">8178725798</a>
+          </div>
+
+          <div class="info-item">
+            <i class="fab fa-whatsapp"></i>
+            <a href="https://wa.me/917053736481">7053736481</a>
+          </div>
+
+          <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:9792245097">9792245097</a>
+          </div>
+
+          <div class="info-item">
+            <i class="far fa-clock"></i>
+            <span>9:00 AM - 6:00 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <header>
       <nav>
         <div class="logo-container">
           <img src="r logo.jpg" alt="R Logic Logo" class="logo-img" />
           <span class="logo-text">
-            <span style="color: var(--logic-blue)">R LOGIC</span> 
+            <span style="color: var(--logic-blue)">R LOGIC</span>
             <span style="color: var(--instrument-green)">INSTRUMENTS</span>
           </span>
         </div>
@@ -558,63 +764,68 @@
     </header>
 
     <section id="home" class="hero">
-      
       <div class="hero-carousel">
         <div class="carousel-track">
-            
-            <div class="carousel-slide">
-                <div class="slide-content-wrapper">
-                    <div class="slide-text">
-                        <h2>Diesel Smoke Meter</h2>
-                        <p>ARAI Approved Aerosmart Diesel Smoke Meter. Designed for high precision, durability, and OIML Class "0" Compliance.</p>
-                        <a href="#products" class="slide-btn">View Details</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="product2.jpeg" alt="Smoke Meter">
-                    </div>
-                </div>
+          <div class="carousel-slide">
+            <div class="slide-content-wrapper">
+              <div class="slide-text">
+                <h2>Diesel Smoke Meter</h2>
+                <p>
+                  ARAI Approved Aerosmart Diesel Smoke Meter. Designed for high
+                  precision, durability, and OIML Class "0" Compliance.
+                </p>
+                <a href="#products" class="slide-btn">View Details</a>
+              </div>
+              <div class="slide-image">
+                <img src="product2.jpeg" alt="Smoke Meter" />
+              </div>
             </div>
+          </div>
 
-            <div class="carousel-slide">
-                <div class="slide-content-wrapper">
-                    <div class="slide-text">
-                        <h2>5 Gas Analyzer</h2>
-                        <p>Advanced gas analysis for Petrol, CNG, and LPG vehicles. Features a 4" Big Graphic LCD Display and High Accuracy.</p>
-                        <a href="#products" class="slide-btn">View Details</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="product1.jpeg" alt="Gas Analyzer">
-                    </div>
-                </div>
+          <div class="carousel-slide">
+            <div class="slide-content-wrapper">
+              <div class="slide-text">
+                <h2>5 Gas Analyzer</h2>
+                <p>
+                  Advanced gas analysis for Petrol, CNG, and LPG vehicles.
+                  Features a 4" Big Graphic LCD Display and High Accuracy.
+                </p>
+                <a href="#products" class="slide-btn">View Details</a>
+              </div>
+              <div class="slide-image">
+                <img src="product1.jpeg" alt="Gas Analyzer" />
+              </div>
             </div>
+          </div>
 
-            <div class="carousel-slide">
-                <div class="slide-content-wrapper">
-                    <div class="slide-text">
-                        <h2>Combined Analyzer</h2>
-                        <p>The ultimate all-in-one hybrid solution. Integrates Gas Analyzer and Smoke Meter capabilities with a space-saving design.</p>
-                        <a href="#products" class="slide-btn">View Details</a>
-                    </div>
-                    <div class="slide-image">
-                        <img src="product3.png" alt="Combined Analyzer">
-                    </div>
-                </div>
+          <div class="carousel-slide">
+            <div class="slide-content-wrapper">
+              <div class="slide-text">
+                <h2>Combined Analyzer</h2>
+                <p>
+                  The ultimate all-in-one hybrid solution. Integrates Gas
+                  Analyzer and Smoke Meter capabilities with a space-saving
+                  design.
+                </p>
+                <a href="#products" class="slide-btn">View Details</a>
+              </div>
+              <div class="slide-image">
+                <img src="product3.png" alt="Combined Analyzer" />
+              </div>
             </div>
-
+          </div>
         </div>
       </div>
 
       <div class="hero-static-content reveal">
-          <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
-          <p>
-            Trusted solutions in 
-            <span class="highlight-text">Pollution Checking</span>, 
-            Smoke meter, Gas Analyzers,
-            and Garage Equipment. Excellence in manufacturing and service since
-            2020.
-          </p>
+        <h1>Driving the Future of <br /><span>Auto Wellness</span></h1>
+        <p>
+          Trusted solutions in
+          <span class="highlight-text">Pollution Checking</span>, Smoke meter,
+          Gas Analyzers, and Garage Equipment. Excellence in manufacturing and
+          service since 2020.
+        </p>
       </div>
-
     </section>
 
     <section id="about" class="section">
@@ -769,7 +980,8 @@
           <div class="contact-info-card">
             <h4><i class="fas fa-map-marker-alt"></i> Patna Branch</h4>
             <p class="contact-item">
-              Near Microtek Office, Chhoti Pahadi, Zero Miles,<br />Patna - Bihar
+              Near Microtek Office, Chhoti Pahadi, Zero Miles,<br />Patna -
+              Bihar
             </p>
           </div>
 
@@ -784,16 +996,27 @@
 
         <div class="contact-wrapper reveal" style="margin-top: 30px">
           <div class="contact-info-card contact-bottom-card">
-            
             <div class="contact-person">
               <h4><i class="fas fa-phone-alt"></i> Sarvesh Kumar</h4>
-              <p class="contact-item" style="margin-bottom: 5px;">
-                 <a href="tel:8178725798">Mob: 8178725798</a>
+              <p class="contact-item" style="margin-bottom: 5px">
+                <a href="tel:8178725798">Mob: 8178725798</a>
               </p>
               <p class="contact-item">
-                 <a href="https://wa.me/917053736481" style="display: flex; align-items: center; justify-content: center; gap: 5px;">
-                   <i class="fab fa-whatsapp" style="color: #25D366; font-size: 1.2rem;"></i> 7053736481
-                 </a>
+                <a
+                  href="https://wa.me/917053736481"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 5px;
+                  "
+                >
+                  <i
+                    class="fab fa-whatsapp"
+                    style="color: #25d366; font-size: 1.2rem"
+                  ></i>
+                  7053736481
+                </a>
               </p>
             </div>
 
@@ -807,7 +1030,11 @@
             <div class="contact-person">
               <h4><i class="fas fa-envelope"></i> Email Us</h4>
               <p class="contact-item">
-                <a href="mailto:rlogicinstruments@gmail.com" style="word-break: break-all;">rlogicinstruments@gmail.com</a>
+                <a
+                  href="mailto:rlogicinstruments@gmail.com"
+                  style="word-break: break-all"
+                  >rlogicinstruments@gmail.com</a
+                >
               </p>
             </div>
           </div>
@@ -863,18 +1090,18 @@
         const slideInterval = 3000; // 3 seconds
 
         if (totalSlides > 0) {
-            setInterval(() => {
-                currentIndex++;
-                
-                // When we reach the end, wrap back to the start
-                if (currentIndex >= totalSlides) {
-                    currentIndex = 0;
-                }
+          setInterval(() => {
+            currentIndex++;
 
-                // Move the track to the left by (Index * 100%)
-                const moveAmount = currentIndex * 100;
-                track.style.transform = `translateX(-${moveAmount}%)`;
-            }, slideInterval);
+            // When we reach the end, wrap back to the start
+            if (currentIndex >= totalSlides) {
+              currentIndex = 0;
+            }
+
+            // Move the track to the left by (Index * 100%)
+            const moveAmount = currentIndex * 100;
+            track.style.transform = `translateX(-${moveAmount}%)`;
+          }, slideInterval);
         }
 
         // 3. SCROLL REVEAL ANIMATION
@@ -888,7 +1115,9 @@
             }
           });
         }, observerOptions);
-        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
       });
     </script>
   </body>
